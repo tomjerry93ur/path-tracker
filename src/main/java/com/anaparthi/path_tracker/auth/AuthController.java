@@ -3,6 +3,7 @@ package com.anaparthi.path_tracker.auth;
 import com.anaparthi.path_tracker.dto.LoginRequest;
 import com.anaparthi.path_tracker.dto.RegisterRequest;
 import com.anaparthi.path_tracker.dto.JwtResponse;
+import com.anaparthi.path_tracker.dto.RegisterResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,7 +17,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public JwtResponse register(@RequestBody RegisterRequest req) {
+    public RegisterResponse register(@RequestBody RegisterRequest req) {
         return authService.register(req);
     }
 

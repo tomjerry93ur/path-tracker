@@ -3,6 +3,7 @@ package com.anaparthi.path_tracker.auth;
 import com.anaparthi.path_tracker.dto.LoginRequest;
 import com.anaparthi.path_tracker.dto.RegisterRequest;
 import com.anaparthi.path_tracker.dto.JwtResponse;
+import com.anaparthi.path_tracker.dto.RegisterResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,7 +31,7 @@ public class AuthService {
         this.authManager = authManager;
     }
 
-    public JwtResponse register(RegisterRequest req) {
+    public RegisterResponse register(RegisterRequest req) {
 
         if (userRepository.existsByUsername(req.getUsername())) {
             throw new RuntimeException("Username already exists");
@@ -45,10 +46,8 @@ public class AuthService {
 
         userRepository.save(user);
 
-        UserDetails ud = userDetailsService.loadUserByUsername(user.getUsername());
-        String token = jwtService.generateToken(ud);
 
-        return new JwtResponse(token);
+        return new RegisterResponse("Registration Successful");
     }
 
     public JwtResponse login(LoginRequest req) {
