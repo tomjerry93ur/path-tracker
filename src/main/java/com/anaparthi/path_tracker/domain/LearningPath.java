@@ -5,13 +5,17 @@ import jakarta.validation.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.*;
 
 @Entity
 @Table(name = "learning_paths")
-public class    LearningPath{
+@Getter
+@Setter
+public class LearningPath{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,9 +42,6 @@ public class    LearningPath{
     @Column(nullable = false)
     private LearningPathStatus status;
 
-    @OneToMany(mappedBy = "learningPath", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Section> sections;
-
     public LearningPath() {}
 
     public LearningPath(Long id,String title,String description,LocalDate startDate,LocalDate targetEndDate,LearningPathStatus status,List<Section> sections) {
@@ -50,53 +51,5 @@ public class    LearningPath{
         this.startDate = startDate;
         this.targetEndDate = targetEndDate;
         this.status = status;
-        this.sections = sections;
-
-    }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-    public void setTitle(String title) { this.title = title; }
-
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getTargetEndDate() {
-        return targetEndDate;
-    }
-    public void setTargetEndDate(LocalDate targetEndDate) {
-        this.targetEndDate = targetEndDate;
-    }
-
-    public LearningPathStatus getStatus() {
-        return status;
-    }
-    public void setStatus(LearningPathStatus status) {
-        this.status = status;
-    }
-
-    public List<Section> getSections() {
-        return sections;
-    }
-    public void setSections(List<Section> sections) {
-        this.sections = sections;
     }
 }

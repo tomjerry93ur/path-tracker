@@ -25,9 +25,9 @@ public class LearningPathController {
         return learningPathService.getAllLearningPaths();
     }
 
-    @GetMapping("/{pathId")
-    public LearningPath getPath(@PathVariable Long pathid){
-        return learningPathService.startLearningPath(pathid);
+    @GetMapping("/{pathId}")
+    public LearningPath getPath(@PathVariable Long pathId){
+        return learningPathService.startLearningPath(pathId);
     }
 
 }

@@ -5,11 +5,13 @@ import com.anaparthi.path_tracker.domain.LearningPathStatus;
 import com.anaparthi.path_tracker.domain.SectionStatus;
 import com.anaparthi.path_tracker.repository.LearningPathRepository;
 import com.anaparthi.path_tracker.repository.SectionRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class LearningPathService {
 
     private final LearningPathRepository learningPathRepository;
@@ -49,7 +51,7 @@ public class LearningPathService {
     public void autoCompletePath(Long pathId) {
 
         long incompleteSections =
-                sectionRepository.countByLearningPathAndStatusNot(
+                sectionRepository.countByLearningPathIdAndStatusNot(
                         pathId, SectionStatus.COMPLETED);
 
         if (incompleteSections == 0) {

@@ -1,5 +1,6 @@
 package com.anaparthi.path_tracker.Service;
 
+import com.anaparthi.path_tracker.domain.Section;
 import com.anaparthi.path_tracker.domain.Task;
 import com.anaparthi.path_tracker.domain.TaskStatus;
 import com.anaparthi.path_tracker.repository.TaskRepository;
@@ -47,6 +48,7 @@ public class TaskService {
 
         return taskRepository.save(task);
     }
+
     public Task updateTaskStatus(Long taskId, TaskStatus status) {
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Task not found"));

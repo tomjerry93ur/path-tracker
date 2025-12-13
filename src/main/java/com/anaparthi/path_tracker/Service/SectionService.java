@@ -28,8 +28,11 @@ public class SectionService {
 
         learningPathService.getLearningPathById(pathId);
 
+        Long count = sectionRepository.countByLearningPathId(pathId);
+
         section.setLearningPathId(pathId);
         section.setStatus(SectionStatus.NOT_STARTED);
+        section.setOrderIndex(count != null ? ++count : 1);
 
         return sectionRepository.save(section);
     }

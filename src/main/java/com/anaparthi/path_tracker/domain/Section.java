@@ -41,6 +41,8 @@ public class Section {
     @Column(nullable = false)
     private SectionStatus status;
 
+    private Long orderIndex;
+
     public Section() {}
 
     // getters & setters
@@ -107,5 +109,9 @@ public class Section {
 
     public void setStatus(SectionStatus status) {
         this.status = status;
+    }
+
+    public void setOrderIndex(Long orderIndex) {
+        this.orderIndex = orderIndex;
     }
 }
