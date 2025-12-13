@@ -1,11 +1,11 @@
 package com.anaparthi.path_tracker.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
@@ -15,51 +15,32 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Task title cannot be empty")
-    @Size(min = 3, max = 100, message = "Task title must be between 3 and 100 characters")
+    @Column(nullable = false)
+    private Long sectionId;
+
+    @NotBlank(message = "Title cannot be empty")
     @Column(nullable = false)
     private String title;
 
-    @Size(max = 500)
+    @Size(max = 500, message = "Description cannot exceed 500 characters")
+    @Column(length = 1000)
     private String description;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TaskType type;
 
-    @Positive(message = "Estimated minutes must be greater than 0")
-    @Column(name = "estimated_minutes")
-    private int estimatedMinutes;
-
-    @Positive(message = "Actual minutes must be greater than 0")
-    @Column(name = "actual_minutes")
-    private Integer actualMinutes;
-
-    @Column(name = "completion_date")
-    private LocalDate completionDate;
+    @Min(0)
+    @Column(nullable = false)
+    private Integer estimatedMinutes;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TaskType status;
+    private TaskStatus status;
 
-    @ManyToOne
-    @JoinColumn(name = "section_id")
-    private Section section;
+    private LocalDateTime completedAt;
 
-    public Task() {}
-
-    public Task(Long id, String title, String description, TaskType type,
-                int estimatedMinutes, Integer actualMinutes,
-                LocalDate completionDate, TaskType status, Section section) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.type = type;
-        this.estimatedMinutes = estimatedMinutes;
-        this.actualMinutes = actualMinutes;
-        this.completionDate = completionDate;
-        this.status = status;
-        this.section = section;
+    public Task() {
     }
 
     public Long getId() {
@@ -69,9 +50,18 @@ public class Task {
         this.id = id;
     }
 
+    public Long getSectionId() {
+        return sectionId;
+    }
+
+    public void setSectionId(Long sectionId) {
+        this.sectionId = sectionId;
+    }
+
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -79,6 +69,7 @@ public class Task {
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -86,42 +77,32 @@ public class Task {
     public TaskType getType() {
         return type;
     }
+
     public void setType(TaskType type) {
         this.type = type;
     }
 
-    public int getEstimatedMinutes() {
+    public Integer getEstimatedMinutes() {
         return estimatedMinutes;
     }
-    public void setEstimatedMinutes(int estimatedMinutes) {
+
+    public void setEstimatedMinutes(Integer estimatedMinutes) {
         this.estimatedMinutes = estimatedMinutes;
     }
 
-    public Integer getActualMinutes() {
-        return actualMinutes;
-    }
-    public void setActualMinutes(Integer actualMinutes) {
-        this.actualMinutes = actualMinutes;
-    }
-
-    public LocalDate getCompletionDate() {
-        return completionDate;
-    }
-    public void setCompletionDate(LocalDate completionDate) {
-        this.completionDate = completionDate;
-    }
-
-    public TaskType getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
-    public void setStatus(TaskType status) {
+
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 
-    public Section getSection() {
-        return section;
+    public LocalDateTime getCompletedAt() {
+        return completedAt;
     }
-    public void setSection(Section section) {
-        this.section = section;
+
+    public void setCompletedAt(LocalDateTime completedAt) {
+        this.completedAt = completedAt;
     }
 }
