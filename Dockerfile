@@ -19,7 +19,7 @@ WORKDIR /app
 
 # ⛔ IMPORTANT: jar name must match your real jar name
 # Default if pom.xml has artifactId "path-tracker" and version "0.0.1-SNAPSHOT":
-COPY --from=build /app/target/path-tracker-0.0.1-SNAPSHOT.jar app.jar
+COPY /app/target/path-tracker-0.0.1-SNAPSHOT.jar app.jar
 
 # Railway will map the PORT env var; 8080 is just for docs/local
 EXPOSE 8080
