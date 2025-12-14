@@ -1,16 +1,16 @@
-# ===== 1) BUILD STAGE: use Maven to build the jar =====
-FROM maven:3.9-eclipse-temurin-17 AS build
-
-WORKDIR /app
-
-# Copy pom.xml and download dependencies (cache layer)
-COPY pom.xml .
-RUN mvn dependency:go-offline
-
-# Copy source code and build the app
-COPY src ./src
-RUN mvn clean package -DskipTests
-
+# # ===== 1) BUILD STAGE: use Maven to build the jar =====
+# FROM maven:3.9-eclipse-temurin-17 AS build
+#
+# WORKDIR /app
+#
+# # Copy pom.xml and download dependencies (cache layer)
+# COPY pom.xml .
+# RUN mvn dependency:go-offline
+#
+# # Copy source code and build the app
+# COPY src ./src
+# RUN mvn clean package -DskipTests
+#
 
 # ===== 2) RUNTIME STAGE: lightweight JDK image =====
 FROM eclipse-temurin:17-jdk-alpine
