@@ -45,7 +45,8 @@ public class SecurityConfig {
         config.setAllowedOrigins(java.util.List.of(
 //                "https://path-tracker.app",
 //                "https://www.path-tracker.app",
-                "http://localhost:8081"
+                "http://localhost:8081",
+                "http://localhost:5173"
         ));
 
         config.setAllowedMethods(java.util.List.of("GET","POST","PUT","DELETE","OPTIONS"));
