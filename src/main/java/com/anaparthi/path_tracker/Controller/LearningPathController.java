@@ -29,5 +29,18 @@ public class LearningPathController {
     public LearningPath getPath(@PathVariable Long pathId){
         return learningPathService.startLearningPath(pathId);
     }
+    @PutMapping("/{pathId}")
+    public LearningPath updatePath(@PathVariable Long pathId, @Valid @RequestBody LearningPath path){
+        return learningPathService.updateLearningPath(pathId, path);
+    }
 
+    @PostMapping("/{pathId}/start")
+    public LearningPath startPath(@PathVariable Long pathId){
+        return learningPathService.startLearningPath(pathId);
+    }
+
+    @PostMapping("/{pathId}/complete")
+    public void  completePath(@PathVariable Long pathId){
+        learningPathService.CompletePath(pathId);
+    }
 }

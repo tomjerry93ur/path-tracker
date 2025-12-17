@@ -17,7 +17,7 @@ public class Section {
     private Long id;
 
     @Column(nullable = false)
-    private Long learningPathId;   // ✅ FK (IMPORTANT)
+    private Long learningPathId;
 
     @NotBlank(message = "Section title cannot be empty")
     @Size(min = 3, max = 100)

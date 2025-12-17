@@ -59,7 +59,7 @@ public class TaskService {
         }
         taskRepository.save(task);
 
-        sectionService.autoCompleteSection(
+        sectionService.CompleteSection(
                 task.getSectionId());
 
         return task;

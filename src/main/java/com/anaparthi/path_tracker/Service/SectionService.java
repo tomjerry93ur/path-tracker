@@ -57,7 +57,7 @@ public class SectionService {
         return sectionRepository.save(section);
     }
 
-    public void autoCompleteSection(Long sectionId) {
+    public void CompleteSection(Long sectionId) {
 
         Section section = getSectionById(sectionId);
 
@@ -70,7 +70,7 @@ public class SectionService {
             section.setStatus(SectionStatus.COMPLETED);
             sectionRepository.save(section);
 
-            learningPathService.autoCompletePath(
+            learningPathService.CompletePath(
                     section.getLearningPathId());
         }
     }

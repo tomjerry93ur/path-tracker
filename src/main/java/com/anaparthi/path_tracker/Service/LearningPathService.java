@@ -37,6 +37,16 @@ public class LearningPathService {
                 .orElseThrow(() -> new RuntimeException("Learning path not found"));
     }
 
+    public LearningPath updateLearningPath(Long pathId, LearningPath newLearningPath){
+        LearningPath path =  learningPathRepository.findById(pathId).orElseThrow(() ->new RuntimeException("Learning Path Not Found"));
+        path.setTitle(newLearningPath.getTitle());
+        path.setDescription(newLearningPath.getDescription());
+        path.setStartDate(newLearningPath.getStartDate());
+        path.setTargetEndDate(newLearningPath.getTargetEndDate());
+
+        return learningPathRepository.save(path);
+    }
+
     public LearningPath startLearningPath(Long pathId) {
 
         learningPathRepository.findByStatus(LearningPathStatus.IN_PROGRESS)
@@ -48,7 +58,7 @@ public class LearningPathService {
 
         return learningPathRepository.save(path);
     }
-    public void autoCompletePath(Long pathId) {
+    public void CompletePath(Long pathId) {
 
         long incompleteSections =
                 sectionRepository.countByLearningPathIdAndStatusNot(
