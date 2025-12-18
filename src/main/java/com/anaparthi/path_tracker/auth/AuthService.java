@@ -59,6 +59,6 @@ public class AuthService {
         UserDetails ud = userDetailsService.loadUserByUsername(req.getUsername());
         String token = jwtService.generateToken(ud);
 
-        return new JwtResponse(token);
+        return new JwtResponse(token,"bearer",3600);
     }
 }

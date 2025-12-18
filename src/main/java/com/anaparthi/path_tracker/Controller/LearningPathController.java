@@ -1,5 +1,7 @@
 package com.anaparthi.path_tracker.Controller;
 
+import com.anaparthi.path_tracker.dto.LearningPathRequest;
+import com.anaparthi.path_tracker.dto.LearningPathResponse;
 import com.anaparthi.path_tracker.Service.LearningPathService;
 import com.anaparthi.path_tracker.domain.LearningPath;
 import jakarta.validation.Valid;
@@ -16,26 +18,26 @@ public class LearningPathController {
         this.learningPathService=learningPathService;
     }
     @PostMapping
-    public LearningPath createPath(@Valid @RequestBody LearningPath path){
-        return learningPathService.createLearningPath(path);
+    public LearningPathResponse createPath(@Valid @RequestBody LearningPathRequest request){
+        return learningPathService.createLearningPath(request);
     }
 
     @GetMapping
-    public List<LearningPath>getAllPaths(){
+    public List<LearningPathResponse>getAllPaths(){
         return learningPathService.getAllLearningPaths();
     }
 
     @GetMapping("/{pathId}")
-    public LearningPath getPath(@PathVariable Long pathId){
+    public LearningPathResponse getPath(@PathVariable Long pathId){
         return learningPathService.startLearningPath(pathId);
     }
     @PutMapping("/{pathId}")
-    public LearningPath updatePath(@PathVariable Long pathId, @Valid @RequestBody LearningPath path){
-        return learningPathService.updateLearningPath(pathId, path);
+    public LearningPathResponse updatePath(@PathVariable Long pathId, @Valid @RequestBody LearningPathRequest request){
+        return learningPathService.updateLearningPath(pathId, request);
     }
 
     @PostMapping("/{pathId}/start")
-    public LearningPath startPath(@PathVariable Long pathId){
+    public LearningPathResponse startPath(@PathVariable Long pathId){
         return learningPathService.startLearningPath(pathId);
     }
 

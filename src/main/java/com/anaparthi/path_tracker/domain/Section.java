@@ -111,6 +111,10 @@ public class Section {
         this.status = status;
     }
 
+    public Long getOrderIndex() {
+        return orderIndex;
+    }
+
     public void setOrderIndex(Long orderIndex) {
         this.orderIndex = orderIndex;
     }
