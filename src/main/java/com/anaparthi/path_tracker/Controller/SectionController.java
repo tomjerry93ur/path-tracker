@@ -16,18 +16,18 @@ public class SectionController {
         this.sectionService = sectionService;
     }
 
-    @PostMapping
-    public SectionResponse addSection(@PathVariable Long pathId, @Valid @RequestBody SectionRequest request){
-        return sectionService.addSection(pathId, request);
-    }
-
-    @GetMapping
-    public List<SectionResponse> getSections(@PathVariable Long pathId){
-        return sectionService.getSectionsById(pathId);
-    }
-
-    @PutMapping("/{sectionId}")
-    public SectionResponse updateSection(@PathVariable Long pathId, @PathVariable Long sectionId, @Valid @RequestBody SectionRequest request){
-        return sectionService.updateSection(sectionId,request);
-    }
+//    @PostMapping
+//    public SectionResponse addSection(@PathVariable Long pathId, @Valid @RequestBody SectionRequest request){
+//        return sectionService.addSection(pathId, request);
+//    }
+//
+//    @GetMapping
+//    public List<SectionResponse> getSections(@PathVariable Long pathId){
+//        return sectionService.getSectionsById(pathId);
+//    }
+//
+//    @PutMapping("/{sectionId}")
+//    public SectionResponse updateSection(@PathVariable Long pathId, @PathVariable Long sectionId, @Valid @RequestBody SectionRequest request){
+//        return sectionService.updateSection(sectionId,request);
+//    }
 }

@@ -9,10 +9,5 @@ import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    List<Task> findBySectionId(Long sectionId);
 
-    long countBySectionIdAndStatusNot(
-            Long sectionId,
-            TaskStatus status
-    );
 }

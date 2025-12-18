@@ -8,11 +8,4 @@ import java.util.List;
 
 public interface SectionRepository extends JpaRepository<Section, Long> {
 
-    List<Section> findByLearningPathIdOrderByOrderIndexAsc(Long learningPathId);
-
-    long countByLearningPathIdAndStatusNot(
-            Long learningPathId,
-            SectionStatus status);
-
-    Long countByLearningPathId(Long pathId);
 }

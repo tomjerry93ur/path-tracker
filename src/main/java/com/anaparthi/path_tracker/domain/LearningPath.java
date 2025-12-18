@@ -5,8 +5,7 @@ import jakarta.validation.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -15,7 +14,10 @@ import java.util.*;
 @Table(name = "learning_paths")
 @Getter
 @Setter
-public class LearningPath{
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
+public class LearningPath {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,14 +44,7 @@ public class LearningPath{
     @Column(nullable = false)
     private LearningPathStatus status;
 
-    public LearningPath() {}
+    @OneToMany(mappedBy = "path")
+    private List<Section> sections;
 
-    public LearningPath(Long id,String title,String description,LocalDate startDate,LocalDate targetEndDate,LearningPathStatus status,List<Section> sections) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.startDate = startDate;
-        this.targetEndDate = targetEndDate;
-        this.status = status;
-    }
 }

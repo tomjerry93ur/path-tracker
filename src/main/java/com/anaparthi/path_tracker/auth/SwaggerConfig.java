@@ -15,7 +15,7 @@ public class SwaggerConfig {
         return new OpenAPI().addSecurityItem(new SecurityRequirement().addList("oauth2"))
                 .components(new Components().addSecuritySchemes("oauth2", new SecurityScheme()
                                 .type(SecurityScheme.Type.OAUTH2).flows(new OAuthFlows().password(
-                                                        new OAuthFlow().tokenUrl("/api/auth/login")
+                                                        new OAuthFlow().tokenUrl("/api/auth/oauth/token")
                                                                 .scopes(new Scopes())))));
     }
 }

@@ -1,8 +1,16 @@
 package com.anaparthi.path_tracker.dto;
 
 import com.anaparthi.path_tracker.domain.LearningPathStatus;
-import java.time.LocalDate;
+import lombok.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
+@Builder
+@Setter
+@Getter
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class LearningPathResponse {
 
     private Long id;
@@ -11,55 +19,6 @@ public class LearningPathResponse {
     private LearningPathStatus status;
     private LocalDate startDate;
     private LocalDate targetEndDate;
+    private List<SectionResponse> sections;
 
-    public LearningPathResponse() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LearningPathStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(LearningPathStatus status) {
-        this.status = status;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getTargetEndDate() {
-        return targetEndDate;
-    }
-
-    public void setTargetEndDate(LocalDate targetEndDate) {
-        this.targetEndDate = targetEndDate;
-    }
 }
