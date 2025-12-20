@@ -1,9 +1,11 @@
 package com.anaparthi.path_tracker.Controller;
 
+import com.anaparthi.path_tracker.dto.LearningPathDashboard;
 import com.anaparthi.path_tracker.dto.LearningPathRequest;
 import com.anaparthi.path_tracker.dto.LearningPathResponse;
 import com.anaparthi.path_tracker.Service.LearningPathService;
 import com.anaparthi.path_tracker.domain.LearningPath;
+import com.anaparthi.path_tracker.dto.LearningPathShort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,10 +31,6 @@ public class LearningPathController {
         return learningPathService.getLearningPath(pathId);
     }
 
-    @GetMapping
-    public ResponseEntity<?> getLearningPaths() {
-        return learningPathService.getLearningPaths();
-    }
 
     @PutMapping("/{pathId}")
     public ResponseEntity<?> updatePath(
@@ -47,7 +45,7 @@ public class LearningPathController {
         return learningPathService.deleteLearningPath(pathId);
     }
 
-    @GetMapping("/my-paths")
-    public List<LearningPathResponse> getMyLearningPaths() {
+    @GetMapping()
+    public LearningPathDashboard getMyLearningPaths() {
         return learningPathService.getMyLearningPaths();
     }}

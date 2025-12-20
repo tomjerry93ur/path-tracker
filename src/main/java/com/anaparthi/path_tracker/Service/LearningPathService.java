@@ -5,6 +5,7 @@ import com.anaparthi.path_tracker.auth.User;
 import com.anaparthi.path_tracker.auth.UserRepository;
 import com.anaparthi.path_tracker.domain.LearningPath;
 import com.anaparthi.path_tracker.domain.LearningPathStatus;
+import com.anaparthi.path_tracker.dto.LearningPathDashboard;
 import com.anaparthi.path_tracker.dto.LearningPathRequest;
 import com.anaparthi.path_tracker.dto.LearningPathResponse;
 import com.anaparthi.path_tracker.dto.LearningPathShort;
@@ -47,20 +48,6 @@ public class LearningPathService {
         }
     }
 
-    public ResponseEntity<?> getLearningPaths() {
-
-        List<LearningPath> paths =
-                learningPathRepository.findAll();
-
-        if (paths.isEmpty()) {
-            return ResponseEntity.badRequest().body("No learning paths found");
-        }
-
-        List<LearningPathShort> response = learningPathMapper.mapToLearningPathShort(paths);
-
-        return ResponseEntity.ok(response);
-    }
-
     public ResponseEntity<?> updateLearningPath(Long pathId,
                                                 LearningPathRequest request) {
 
@@ -100,13 +87,20 @@ public class LearningPathService {
                 .body("Learning Path deleted");
     }
 
-    public List<LearningPathResponse> getMyLearningPaths() {
+    public LearningPathDashboard getMyLearningPaths() {
 
         User user = appUserDetailsService.getCurrentUser();
 
-        return learningPathRepository.findByUserId(user.getId())
+        List<LearningPathShort> paths = learningPathRepository.findByUserId(user.getId())
                 .stream()
-                .map(learningPathMapper::mapToLearningPathResponse)
+                .map(learningPathMapper::mapToLearningPathShort)
                 .toList();
+
+        return LearningPathDashboard.builder()
+                .learningPaths(paths)
+                .totalPaths(String.valueOf(paths.size()))
+                .completedPaths(String.valueOf(paths.stream()
+                        .filter(path -> path.getStatus().equalsIgnoreCase("Completed")).count()))
+                .build();
     }
 }

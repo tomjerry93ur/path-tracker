@@ -9,4 +9,5 @@ import lombok.*;
 public class LearningPathShort {
     private String title;
     private String description;
+    private String status;
 }
