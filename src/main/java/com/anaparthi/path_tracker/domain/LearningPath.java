@@ -1,5 +1,6 @@
 package com.anaparthi.path_tracker.domain;
 
+import com.anaparthi.path_tracker.auth.User;
 import jakarta.persistence.*;
 import jakarta.validation.*;
 import jakarta.validation.constraints.NotBlank;
@@ -12,16 +13,16 @@ import java.util.*;
 
 @Entity
 @Table(name = "learning_paths")
-@Getter
-@Setter
-@RequiredArgsConstructor
-@AllArgsConstructor
+@Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class LearningPath {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
 
     @NotBlank(message = "Title cannot be empty")
     @Size(min = 3, max = 100, message = "Title must be between 3 and 100 characters")
@@ -44,7 +45,24 @@ public class LearningPath {
     @Column(nullable = false)
     private LearningPathStatus status;
 
-    @OneToMany(mappedBy = "path")
-    private List<Section> sections;
+    @OneToMany(
+            mappedBy = "path",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Section> sections = new ArrayList<>();
+
+    public void addSection(Section section) {
+        sections.add(section);
+        section.setPath(this);
+    }
+
+    public void removeSection(Section section) {
+        sections.remove(section);
+        section.setPath(null);
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
 }

@@ -1,5 +1,7 @@
 package com.anaparthi.path_tracker.auth;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,5 +32,11 @@ public class AppUserDetailsService implements UserDetailsService {
                 user.getPassword(),
                 Collections.emptyList()
         );
+    }
+    public User getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return userRepository.findByUsername(auth.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
     }
 }

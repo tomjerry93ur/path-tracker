@@ -1,9 +1,13 @@
 package com.anaparthi.path_tracker.dto;
 
+import com.anaparthi.path_tracker.domain.TaskStatus;
 import com.anaparthi.path_tracker.domain.TaskType;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
+@Builder
+@Data
 public class TaskRequest {
 
     @NotBlank
@@ -15,38 +19,7 @@ public class TaskRequest {
     @Min(0)
     private Integer estimatedMinutes;
 
-    public TaskRequest() {
-    }
+    private TaskStatus status;
 
-    public String getTitle() {
-        return title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public TaskType getType() {
-        return type;
-    }
-
-    public void setType(TaskType type) {
-        this.type = type;
-    }
-
-    public Integer getEstimatedMinutes() {
-        return estimatedMinutes;
-    }
-
-    public void setEstimatedMinutes(Integer estimatedMinutes) {
-        this.estimatedMinutes = estimatedMinutes;
-    }
 }

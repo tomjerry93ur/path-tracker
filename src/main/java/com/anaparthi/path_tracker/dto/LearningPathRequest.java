@@ -13,7 +13,6 @@ public class LearningPathRequest {
 
     @NotBlank
     private String title;
-
     private String description;
     private LocalDate startDate;
     private LocalDate targetEndDate;

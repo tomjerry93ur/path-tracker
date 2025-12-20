@@ -7,14 +7,8 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "tasks")
-@Getter
-@Setter
-@RequiredArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Task {
 
     @Id
@@ -22,30 +16,83 @@ public class Task {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="sectionId")
+    @JoinColumn(name = "sectionId")
     private Section section;
 
-    @NotBlank(message = "Title cannot be empty")
-    @Column(nullable = false)
     private String title;
-
-    @Size(max = 500, message = "Description cannot exceed 500 characters")
-    @Column(length = 1000)
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private TaskType type;
 
-    @Min(0)
-    @Column(nullable = false)
     private Integer estimatedMinutes;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private TaskStatus status;
 
     private LocalDateTime completedAt;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public TaskType getType() {
+        return type;
+    }
+
+    public void setType(TaskType type) {
+        this.type = type;
+    }
+
+    public Integer getEstimatedMinutes() {
+        return estimatedMinutes;
+    }
+
+    public void setEstimatedMinutes(Integer estimatedMinutes) {
+        this.estimatedMinutes = estimatedMinutes;
+    }
+
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getCompletedAt() {
+        return completedAt;
+    }
+
+    public void setCompletedAt(LocalDateTime completedAt) {
+        this.completedAt = completedAt;
+    }
 }

@@ -29,18 +29,25 @@ public class LearningPathController {
         return learningPathService.getLearningPath(pathId);
     }
 
-//    @PutMapping("/{pathId}")
-//    public LearningPathResponse updatePath(@PathVariable Long pathId, @Valid @RequestBody LearningPathRequest request){
-//        return learningPathService.updateLearningPath(pathId, request);
-//    }
-//
-//    @PostMapping("/{pathId}/start")
-//    public LearningPathResponse startPath(@PathVariable Long pathId){
-//        return learningPathService.startLearningPath(pathId);
-//    }
-//
-//    @PostMapping("/{pathId}/complete")
-//    public void  completePath(@PathVariable Long pathId){
-//        learningPathService.CompletePath(pathId);
-//    }
-}
+    @GetMapping
+    public ResponseEntity<?> getLearningPaths() {
+        return learningPathService.getLearningPaths();
+    }
+
+    @PutMapping("/{pathId}")
+    public ResponseEntity<?> updatePath(
+            @PathVariable Long pathId,
+            @Valid @RequestBody LearningPathRequest request) {
+
+        return learningPathService.updateLearningPath(pathId, request);
+    }
+
+    @DeleteMapping("/{pathId}")
+    public ResponseEntity<?> deletePath(@PathVariable Long pathId) {
+        return learningPathService.deleteLearningPath(pathId);
+    }
+
+    @GetMapping("/my-paths")
+    public List<LearningPathResponse> getMyLearningPaths() {
+        return learningPathService.getMyLearningPaths();
+    }}
